@@ -45,10 +45,32 @@
     height: 26%;
 }
 
+/* Parte alta con user */
+
 .user {
     width: 100%;
     height: 50px;
     background-color: #ededed;
+    padding-left: 10px;
+    line-height: 50px;
+}
+
+
+.user img{
+    height: 36px;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.user-icons {
+    float: right;
+    padding: 0 10px;
+}
+
+.user-icons i {
+    margin: 0 10px;
+    color: #80868a;
+    cursor: pointer;
 }
 
 /* Parte notifiche */
@@ -60,6 +82,11 @@
     display: flex;
     align-items: center;
     padding-left: 15px;
+    cursor: pointer;
+}
+
+.notification:hover .text-notification a {
+    text-decoration: underline;
 }
 
 .icon-notification {
@@ -74,7 +101,7 @@
 .icon-notification i {
     margin: auto;
     color: #9de1fe;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .text-notification {
@@ -111,6 +138,7 @@
     border-radius: 20px;
     border: 0;
     height: 26px;
+    padding-left: 10px;
 }
 
 /* Chat */
@@ -124,40 +152,48 @@
 .chat {
     display: block;
     width: 100%;
-    height: 60px;
+    height: 70px;
     background-color: white;
     border-top: 1px solid lightgrey;
     padding: 10px;
     display: flex;
-    align-items: center;
+    cursor: pointer;
+}
+
+.container-chat .chat:first-child {
+    background-color: #e3e5e8;
+}
+
+.chat:hover {
+    background-color: #f0f2f5;
 }
 
 .chat img {
     height: 40px;
+    align-self: center;
 }
 
 .name-message {
-    float: left;
     padding: 10px;
     width: 100%;
-    clear: both;
+    float: right;
+    align-self: center;
 }
 
 .name-message span {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
 }
 
 .name-message p {
-    font-size: 14px;
+    font-size: 12px;
+    color: #959b9d;
 }
 
 .clock {
-    float: right;
-    clear: both;
+    font-size: 10px;
+    color: #959b9d;
 }
-
-
 
 /* Parte destra main content  */
 
@@ -188,11 +224,13 @@
 }
 
 .text-area input {
-    width: 85%;
+    width: 88%;
     margin: auto;
     border-radius: 20px;
     border: 0;
     height: 34px;
+    padding-left: 10px;
+    font-size: 14px;
 }
 
 .text-area i {
