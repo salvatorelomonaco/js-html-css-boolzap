@@ -108,7 +108,7 @@ function cercaConversazione() {
             // creo una variabile e nella .chat presa singolarmente con this trovo lo span e leggo il suo contenuto con .text()
             var nome = $(this).find('span').text();
             // se la variabile nome è uguale alla variabile ricercaNome
-            if (nome.toLowerCase() == ricercaNome.toLowerCase()) {
+            if (nome.toLowerCase().includes(ricercaNome.toLowerCase())) {
                 // allora mostro solo quella chat
                 $(this).show();
             } else {
