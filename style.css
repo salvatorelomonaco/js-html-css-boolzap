@@ -23,6 +23,7 @@
 .container-app {
     height: 94vh;
     width: 80vw;
+    min-width: 800px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -425,4 +426,11 @@
 
 .no-active {
     display: none;
+}
+
+@media screen and (max-width: 1000px)  {
+    .container-app {
+        height: 100vh;
+        width: 100vw;
+    }
 }

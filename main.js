@@ -9,6 +9,9 @@ $(document).ready(function() {
         inviaMessaggio();
         // setto un timer per richiamare la funzione creata dela risposta del pc, dopo un secondo
         setTimeout(rispostaComputer, 1000)
+        $('.message-options').click(function () {
+            $('.message-options-panel').toggleClass('active');
+        })
     })
 
     // intercetto il clicci del pulsante invio grazie a keypress
@@ -32,6 +35,33 @@ $(document).ready(function() {
     $('.message-user').blur(function() {
         $('.text-area i:last-child').toggleClass('fas fa-microphone fas fa-paper-plane')
     })
+
+    // ora riesco a visualizzare il nome della conversazione che ho cercato
+    $('.search').keyup(function() {
+        // richiamo la funzione
+        cercaConversazione();
+    })
+
+//     function cercaChat() {
+//         var nomiChat = [];
+//
+//         $('.name-message span').each(function() {
+//             var nomeChat = $(this).text();
+//             nomiChat.push(nomeChat);
+//         })
+//     }
+//
+//     $('.search').keypress(function(event) {
+//         if(event.which == 13 ){
+//             var testoRicerca = $('.search').val();
+//             var chat = cercaChat();
+//             if (testoRicerca == chat) {
+//                 alert('ciao')
+//             }
+//         }
+//     })
+//
+//     console.log(nomiChat);
 });
 
 
@@ -65,4 +95,30 @@ function rispostaComputer() {
     messaggioComputer.addClass('received');
     // appendo il messaggio del pc sul container
     $('.messages.active').append(messaggioComputer);
+}
+
+// Creo una funzione per cercare le conversazioni
+function cercaConversazione() {
+    // leggo il contenuto dell'input con .val()
+    var ricercaNome = $('.search').val();
+    // se la barra di ricerca non è vuota
+    if (ricercaNome.lenght != 0) {
+        //controllo singolarmente le classi .chat
+        $('.chat').each(function() {
+            // creo una variabile e nella .chat presa singolarmente con this trovo lo span e leggo il suo contenuto con .text()
+            var nome = $(this).find('span').text();
+            // se la variabile nome è uguale alla variabile ricercaNome
+            if (nome.toLowerCase() == ricercaNome.toLowerCase()) {
+                // allora mostro solo quella chat
+                $(this).show();
+            } else {
+                // altrimenti la nascondo
+                $(this).hide();
+            }
+        });
+    // altrimenti le la barra di ricerca è vuota
+    } else {
+        //mostro tutte le chat
+        $('.chat').show()
+    }
 }
