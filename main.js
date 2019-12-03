@@ -7,6 +7,8 @@ $(document).ready(function() {
     $('.text-area i:last-child').click(function() {
         // richiamo la funzione che ho creato
         inviaMessaggio();
+        // setto un timer per richiamare la funzione creata dela risposta del pc, dopo un secondo
+        setTimeout(rispostaComputer, 1000)
     })
 
     // intercetto il clicci del pulsante invio grazie a keypress
@@ -14,6 +16,8 @@ $(document).ready(function() {
         // il pulsante invia equivale a 13
         if(event.which == 13 ){
             inviaMessaggio();
+            // setto un timer per richiamare la funzione creata dela risposta del pc, dopo un secondo
+            setTimeout(rispostaComputer, 1000)
         }
     })
 
@@ -49,4 +53,16 @@ function inviaMessaggio() {
         // e infine vado a rempostare il valore del mio input con una stringa vuota
         $('.message-user').val('');
     }
+}
+
+// Creo una funzione per una risposta automatica del pc
+function rispostaComputer() {
+    // creo una variabile per il messaggio del pc e gli clono il template
+    var messaggioComputer = $('.template .message').clone();
+    // a questo vado a selezionare il figlio sotto .message, quelo con la classe .message-text e con la funzione .text scrivendo dentro imposto il messaggio
+    messaggioComputer.children('.message-text').text('Got it');
+    //aggiungo la classe .receive, con float left e background bianco alla classe .messagge
+    messaggioComputer.addClass('received');
+    // appendo il messaggio del pc sul container
+    $('.messages.active').append(messaggioComputer);
 }
