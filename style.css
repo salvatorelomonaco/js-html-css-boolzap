@@ -21,7 +21,7 @@
 /* Contenitore main content */
 
 .container-app {
-    height: 95vh;
+    height: 94vh;
     width: 80vw;
     position: absolute;
     left: 50%;
@@ -45,7 +45,6 @@
 
 .header-left {
     width: 100%;
-    height: 26%;
 }
 
 /* Parte alta con user */
@@ -57,7 +56,6 @@
     padding-left: 10px;
     line-height: 50px;
 }
-
 
 .user img{
     height: 36px;
@@ -72,7 +70,7 @@
 
 .user-icons i {
     margin: 0 10px;
-    color: #80868a;
+    color: #959b9d;
     cursor: pointer;
 }
 
@@ -147,7 +145,7 @@
 /* Chat */
 
 .container-chat {
-    height: 74%;
+    height: calc(100% - 40px - 72px - 50px);
     width: 100%;
     overflow-y: scroll;
 }
@@ -201,9 +199,9 @@
 /* Parte destra main content  */
 
 .container-app .right-part {
-    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    /* background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
     background-repeat: repeat;
-    background-size: contain;
+    background-size: contain; */
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -256,8 +254,116 @@
 
 .current-chat-icon i {
     margin: 0 10px;
-    color: #80868a;
+    color: #959b9d;
     cursor: pointer;
+}
+
+/* area dei messaggi */
+
+.template {
+    display: none;
+}
+
+.right-part .message-container {
+    width: 100%;
+    height: calc(100% - 50px - 50px);
+}
+
+.right-part .messages {
+	display: none;
+	height: 100%;
+	width: 100%;
+	padding: 5% 10%;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+.right-part .messages.active {
+	display: block;
+}
+
+.right-part .messages .message {
+	position: relative;
+	margin: 5px 0;
+	padding: 15px 15px 20px 15px;
+	min-width: 20%;
+	max-width: 60%;
+	background: #fff;
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+.right-part .messages .message::after {
+	content: '';
+	display: table;
+	overflow: hidden;
+	clear: both;
+}
+
+.f-right {
+    float: right;
+}
+
+.right-part .messages .message:hover .message-options, .right-part .messages .message .message-options.active {
+	display: block;
+}
+
+.right-part .messages .message .message-options {
+	display: none;
+	color: #B6B9BB;
+	cursor: pointer;
+}
+
+.right-part .messages .message .message-options-panel {
+	display: none;
+	position: absolute;
+	bottom: -75px;
+	width: 150px;
+	height: 80px;
+	background: white;
+	box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
+}
+
+.right-part .messages .message.sent .message-options-panel {
+	right: 0;
+}
+
+.right-part .messages .message.received .message-options-panel {
+	left: 0;
+}
+
+.right-part .messages .message .message-options-panel.active {
+	display: block;
+}
+
+.right-part .messages .message .message-options-panel > div {
+	cursor: pointer;
+	width: 100%;
+	height: 50%;
+	line-height: 40px;
+	font-size: 14px;
+	text-align: center;
+}
+.right-part .messages .message .message-options-panel > div:hover {
+	color: #B6B9BB;
+}
+.right-part .messages .message .message-time {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	font-size: 10px;
+	color: #B6B9BB;
+}
+.right-part .messages .message.received {
+	background: white;
+	float:left;
+	clear:both;
+}
+.right-part .messages .message.sent {
+	background: #D5F9BA;
+	float: right;
+	clear:both;
 }
 
 /* Parte di text messaggio */
@@ -303,6 +409,7 @@
     padding: 0 170px;
     color: #959b9d;
     text-align: center;
+    z-index: 2;
 }
 
 .intro-layout img {
