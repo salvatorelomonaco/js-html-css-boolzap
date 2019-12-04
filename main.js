@@ -36,6 +36,7 @@ $(document).ready(function() {
         cercaConversazione();
     })
 
+    
     $('.chat').click(function() {
         var nomeChat = $(this).find('span').text();
         $('.header-right').hide();
@@ -45,8 +46,6 @@ $(document).ready(function() {
         $('.chat').removeClass('active');
         $(this).addClass('active');
     })
-
-
 });
 
 $(document).on('click','.message i', function () {
@@ -54,7 +53,7 @@ $(document).on('click','.message i', function () {
 });
 
 $(document).on("click", ".message-delete", function(){
-    $(this).parents(".message").remove();
+    $(this).parents(".message").hide();
 });
 
 // creo una funzione per l'invio messaggio
