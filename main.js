@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $('.chat').click(function() {
         $('.intro-layout').addClass('no-active');
     });
@@ -7,11 +8,6 @@ $(document).ready(function() {
     $('.text-area i:last-child').click(function() {
         // richiamo la funzione che ho creato
         inviaMessaggio();
-        // setto un timer per richiamare la funzione creata dela risposta del pc, dopo un secondo
-        setTimeout(rispostaComputer, 1000)
-        $('.message-options').click(function () {
-            $('.message-options-panel').toggleClass('active');
-        })
     })
 
     // intercetto il clicci del pulsante invio grazie a keypress
@@ -19,8 +15,6 @@ $(document).ready(function() {
         // il pulsante invia equivale a 13
         if(event.which == 13 ){
             inviaMessaggio();
-            // setto un timer per richiamare la funzione creata dela risposta del pc, dopo un secondo
-            setTimeout(rispostaComputer, 1000)
         }
     })
 
@@ -42,28 +36,26 @@ $(document).ready(function() {
         cercaConversazione();
     })
 
-//     function cercaChat() {
-//         var nomiChat = [];
-//
-//         $('.name-message span').each(function() {
-//             var nomeChat = $(this).text();
-//             nomiChat.push(nomeChat);
-//         })
-//     }
-//
-//     $('.search').keypress(function(event) {
-//         if(event.which == 13 ){
-//             var testoRicerca = $('.search').val();
-//             var chat = cercaChat();
-//             if (testoRicerca == chat) {
-//                 alert('ciao')
-//             }
-//         }
-//     })
-//
-//     console.log(nomiChat);
+    $('.chat').click(function() {
+        var nomeChat = $(this).find('span').text();
+        $('.header-right').hide();
+        $('.header-right[data-nome="' + nomeChat + '"]').show();
+        $('.messages').removeClass('active');
+        $('.messages[data-nome="' + nomeChat + '"]').addClass('active');
+        $('.chat').removeClass('active');
+        $(this).addClass('active');
+    })
+
+
 });
 
+$(document).on('click','.message i', function () {
+    $(this).next().toggleClass("active");
+});
+
+$(document).on("click", ".message-delete", function(){
+    $(this).parents(".message").remove();
+});
 
 // creo una funzione per l'invio messaggio
 function inviaMessaggio() {
@@ -82,6 +74,8 @@ function inviaMessaggio() {
         $('.messages.active').append(nuovoMessaggio);
         // e infine vado a rempostare il valore del mio input con una stringa vuota
         $('.message-user').val('');
+
+        setTimeout(rispostaComputer, 1000);
     }
 }
 

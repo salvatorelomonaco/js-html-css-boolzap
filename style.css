@@ -163,7 +163,7 @@
     cursor: pointer;
 }
 
-.container-chat .chat:first-child {
+.container-chat .chat.active {
     background-color: #e3e5e8;
 }
 
@@ -201,9 +201,6 @@
 /* Parte destra main content  */
 
 .container-app .right-part {
-    /* background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-    background-repeat: repeat;
-    background-size: contain; */
     width: 70%;
     display: flex;
     flex-direction: column;
