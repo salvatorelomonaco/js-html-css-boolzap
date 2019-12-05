@@ -280,6 +280,7 @@
 
 .right-part .messages.active {
 	display: block;
+    overflow-y: auto;
 }
 
 .right-part .messages .message {

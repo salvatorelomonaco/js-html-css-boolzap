@@ -9,7 +9,7 @@ $(document).ready(function() {
         var messaggi = conversazioni[nomeConversazione];
 
         for (var i = 0; i < messaggi.length; i++) {
-            
+
             var singoloMessaggio = messaggi[i];
 
             var testo_messaggio = singoloMessaggio.testo;
@@ -122,8 +122,25 @@ function inviaMessaggio() {
         $('.messages.active').append(nuovoMessaggio);
         // e infine vado a rempostare il valore del mio input con una stringa vuota
         $('.message-user').val('');
+
+        // setTimeout(function() {
+        //     if ($('.messages').hasClass('active')) {
+        //         $('.header-right').find('p').text('Online');
+        //     } else {
+        //         $('.header-right').find('p').text();
+        //     }
+        // }, 400)
+        //
+        // setTimeout(function() {
+        //     if ($('.messages').hasClass('active')) {
+        //         $('.header-right').find('p').text('Sta scrivendo...');
+        //     } else {
+        //         $('.header-right').find('p').text();
+        //     }
+        // }, 1000);
+
         // imposto un timeout per la risposta del computer;
-        setTimeout(rispostaComputer, 1500);
+        setTimeout(rispostaComputer, 2000);
         // quando io scrivo nela chat, la chat attiva si posizione nella prima posizione
         $('.chat.active').prependTo('.container-chat');
         // vado a trovare nelle chat il messaggio che io ho scritto e lo vado a sostituire nel p
@@ -132,7 +149,6 @@ function inviaMessaggio() {
         nuovoMessaggio.children('.message-time').text(tempoReale());
         // riporto il tempo reale sulla chat a sinistra al mio invio del messaggio
         $('.chat.active .clock').text(tempoReale());
-        $('.header-right').find('p').text('Online');
     }
 }
 
@@ -152,6 +168,7 @@ function rispostaComputer() {
     messaggioComputer.children('.message-time').text(tempoReale());
     // riporto il tempo reale sulla chat a sinistra all'invio del messaggio computer
     $('.chat.active .clock').text(tempoReale());
+    $('.header-right').find('p').text('Online');
 }
 
 // Creo una funzione per cercare le conversazioni
