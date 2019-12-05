@@ -1,6 +1,7 @@
 $(document).ready(function() {
-
+    // intercetto il click sulle chat
     $('.chat').click(function() {
+        // rimuovo il mio layout
         $('.intro-layout').addClass('no-active');
     });
 
@@ -8,15 +9,21 @@ $(document).ready(function() {
     $('.text-area i:last-child').click(function() {
         // richiamo la funzione che ho creato
         inviaMessaggio();
-    })
+        // if $('.chat').is('.active'){
+        //     $('.header-right').find('p').text('Online');
+        // }
+    });
 
     // intercetto il clicci del pulsante invio grazie a keypress
     $('.message-user').keypress(function(event) {
         // il pulsante invia equivale a 13
         if(event.which == 13 ){
             inviaMessaggio();
+            // if $('.chat').is('.active'){
+            //     $('.header-right').find('p').text('Online');
+            // }
         }
-    })
+    });
 
     // cambio l'icona quando scrivo sull'input
     // seleziono l'input e per riconoscere che sto sctivendo uno keyup
@@ -25,7 +32,7 @@ $(document).ready(function() {
         $('.text-area i:last-child').removeClass('fas fa-microphone');
         // aggiungo l'aeroplanino
         $('.text-area i:last-child').addClass('fas fa-paper-plane');
-    })
+    });
 
     // viceversa quando io clicco su un'altra zona del documento che non è l'input selezionato
     $('.message-user').keyup(function(event) {
@@ -35,23 +42,38 @@ $(document).ready(function() {
             // aggiungo il microfono
             $('.text-area i:last-child').addClass('fas fa-microphone');
         }
-    })
+    });
 
     // ora riesco a visualizzare il nome della conversazione che ho cercato
     $('.search').keyup(function() {
         // richiamo la funzione
         cercaConversazione();
-    })
+    });
 
+    // $('.chat.active') {
+    //     $('.header-right').find('p').text('Online');
+    // }
+
+    // intercetto il click sulle chat a sinistra
     $('.chat').click(function() {
+        // rimuovo la classe active, che mi evidenzia la chat attiva da tutte le chat
         $('.chat').removeClass('active');
+        // e la vado ad aggiunge solamente a uella cliccata
         $(this).addClass('active');
+        // creo una variabile dove vado a leggere dentro l'attributo data-nome dela mia cat selezionata
         var nomeChat = $(this).attr('data-nome');
+        // dai container a destra rimuovo la classe active, che mi da il display block per visualizzare tutta la conversazione
         $('.messages').removeClass('active');
+        // con un selettore seleziono il container che ha come data-nome la mia variabile della chat attiva e aggiungo la classe active per farla spuntare nello schermo
         $('.messages[data-nome="' + nomeChat + '"]').addClass('active');
+        // cambio anche la parte alta dela chat con il nome e immagine
+        // creo una variabile che mi va a leggere lo span che contine il nome dentro la chat
         var nomeContatto = $(this).find('span').text();
+        // lo sostituisco al nome nell'header
         $('.current-chat span').text(nomeContatto);
+        // stessa cosa con ll'immagine
         var immagineContatto = $(this).find('img').attr('src');
+        // sostituisco l'immagine
         $('.header-right img').attr('src', immagineContatto);
     });
 
@@ -87,7 +109,10 @@ function inviaMessaggio() {
         $('.chat.active').prependTo('.container-chat');
         // vado a trovare nelle chat il messaggio che io ho scritto e lo vado a sostituire nel p
         $('.chat.active .name-message').find('p').text(testoMessaggio);
-
+        // vado a selezionare lo span del tempo nel mio template e gli scrivo il tempo reale
+        nuovoMessaggio.children('.message-time').text(tempoReale());
+        // riporto il tempo reale sulla chat a sinistra al mio invio del messaggio
+        $('.chat.active .clock').text(tempoReale());
     }
 }
 
@@ -101,8 +126,12 @@ function rispostaComputer() {
     messaggioComputer.addClass('received');
     // appendo il messaggio del pc sul container
     $('.messages.active').append(messaggioComputer);
-    // vado a reportare il messaggio di risposta del pc nella chat a destra
+    // vado a riportare il messaggio di risposta del pc nella chat a sinistra
     $('.chat.active .name-message').find('p').text('Got it');
+    // vado a selezionare lo span del tempo nel mio template e gli scrivo il tempo reale
+    messaggioComputer.children('.message-time').text(tempoReale());
+    // riporto il tempo reale sulla chat a sinistra all'invio del messaggio computer
+    $('.chat.active .clock').text(tempoReale());
 }
 
 // Creo una funzione per cercare le conversazioni
@@ -127,6 +156,20 @@ function cercaConversazione() {
     // altrimenti le la barra di ricerca è vuota
     } else {
         //mostro tutte le chat
-        $('.chat').show()
+        $('.chat').show();
     }
+}
+
+// creo una funzione per andare a ricreare il tempo reale
+function tempoReale() {
+    // creo una var con new Date() assegnato
+    var orarioMessaggio = new Date();
+    // estraggo le ore e le converto in stringhe
+    var ora = orarioMessaggio.getHours().toString();
+    // estraggo i minuti, faccio quel passaggio per far si da riportare lo zero, in caso i minuti fossero minori di dieci
+    var minuti = (orarioMessaggio.getMinutes()<10?'0':'') + orarioMessaggio.getMinutes();
+    // concateno le due variabili per riprodurre l'orario complessivo
+    var oraMinuti = ora + "." + minuti;
+    // chiudo la funzione con la variabile oraMinuti returnata
+    return oraMinuti
 }
