@@ -18,9 +18,9 @@
             <div class="container-bottom"></div>
             <!-- Contenitore main di tutto il contenuto -->
             <div class="container-app">
+                
                 <!-- Parte sinistra -->
                 <div class="left-part">
-
                     <div class="header-left">
                         <!-- Banner utente -->
                         <div class="user">
@@ -117,6 +117,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Parte destra -->
                 <div class="right-part">
                     <!-- Layout di introduzione -->
@@ -141,14 +142,14 @@
                     <!-- Container destra dei messaggi -->
                     <div class="message-container">
                     <!-- Tutti i messaggi che verranno visualizzati volta per volta -->
-                        <div class="messages active" data-nome="Vera">
+                        <!-- <div class="messages active" data-nome="Vera">
                             <div class="message received">
                                 <span class="message-text">You better step it up</span>
                                 <span class="message-time">11.00</span>
                                 <i class="fa fa-chevron-down f-right message-options"></i>
                                 <div class="message-options-panel">
                                     <div class="message-info">Info messaggio</div>
-                                    <div class="message-destroy">Elimina messaggio</div>
+                                    <div class="message-delete">Elimina messaggio</div>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +160,7 @@
                                 <i class="fa fa-chevron-down f-right message-options"></i>
                                 <div class="message-options-panel">
                                     <div class="message-info">Info messaggio</div>
-                                    <div class="message-destroy">Elimina messaggio</div>
+                                    <div class="message-delete">Elimina messaggio</div>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +229,7 @@
                                     <div class="message-destroy">Elimina messaggio</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Input per scrivere messaggi -->
                     <div class="text-area">
@@ -238,17 +239,20 @@
                     </div>
                 </div>
 
-                <!-- template per messaggi -->
+                <!-- Template -->
                 <div class="template">
+                    <!-- Per messaggi -->
         			<div class="message">
         				<span class="message-text"></span>
-        				<span class="message-time"></span>
+        				<span class="message-time">11.00</span>
                         <i class="fa fa-chevron-down f-right message-options"></i>
         				<div class="message-options-panel">
         					<div class="message-info">Info messaggio</div>
         					<div class="message-delete">Elimina messaggio</div>
         				</div>
         			</div>
+                    <!-- Per contenitore messaggi con messaggio statico -->
+                    <div class="messages" data-nome="Pippa"></div>
                 </div>
             </div>
         </div>

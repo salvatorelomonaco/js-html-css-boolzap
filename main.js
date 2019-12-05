@@ -1,4 +1,33 @@
 $(document).ready(function() {
+
+    for (var nomeConversazione in conversazioni) {
+
+        var contenitoreMessaggi = $('.template .messages').clone();
+
+        contenitoreMessaggi.attr('data-nome', nomeConversazione);
+
+        var messaggi = conversazioni[nomeConversazione];
+
+        for (var i = 0; i < messaggi.length; i++) {
+            
+            var singoloMessaggio = messaggi[i];
+
+            var testo_messaggio = singoloMessaggio.testo;
+
+            var direzioneMessaggio = singoloMessaggio.direzione;
+            // creo una variabile per clonare il template del messaggio, cosi facendo vado a lavorare su quello specifico template
+            var nuovoMessaggio = $('.template .message').clone();
+            // con children selezione lo span con la classe .message-text e con .text vado a modificare il testo dello span sostuuendolo con la variabile testoMessaggio che leggerà dentro il mio valore del'input
+            nuovoMessaggio.children('.message-text').text(testo_messaggio);
+            // aggiungo la classe .sent che ha il float right, il background verde
+            nuovoMessaggio.addClass(direzioneMessaggio);
+            // aggiungo questo messaggio al suo container con la funzione append
+            contenitoreMessaggi.append(nuovoMessaggio);
+        }
+        $('.message-container').append(contenitoreMessaggi);
+    }
+
+
     // intercetto il click sulle chat
     $('.chat').click(function() {
         // rimuovo il mio layout
@@ -9,9 +38,6 @@ $(document).ready(function() {
     $('.text-area i:last-child').click(function() {
         // richiamo la funzione che ho creato
         inviaMessaggio();
-        // if $('.chat').is('.active'){
-        //     $('.header-right').find('p').text('Online');
-        // }
     });
 
     // intercetto il clicci del pulsante invio grazie a keypress
@@ -19,9 +45,6 @@ $(document).ready(function() {
         // il pulsante invia equivale a 13
         if(event.which == 13 ){
             inviaMessaggio();
-            // if $('.chat').is('.active'){
-            //     $('.header-right').find('p').text('Online');
-            // }
         }
     });
 
@@ -50,10 +73,6 @@ $(document).ready(function() {
         cercaConversazione();
     });
 
-    // $('.chat.active') {
-    //     $('.header-right').find('p').text('Online');
-    // }
-
     // intercetto il click sulle chat a sinistra
     $('.chat').click(function() {
         // rimuovo la classe active, che mi evidenzia la chat attiva da tutte le chat
@@ -76,14 +95,14 @@ $(document).ready(function() {
         // sostituisco l'immagine
         $('.header-right img').attr('src', immagineContatto);
     });
+});
 
-    $(document).on('click','.message i', function () {
-        $(this).next().toggleClass("active");
-    });
+$(document).on('click','.message i', function () {
+    $(this).next().toggleClass('active');
+});
 
-    $(document).on("click", ".message-delete", function(){
-        $(this).parents(".message").hide();
-    });
+$(document).on('click', '.message-delete', function(){
+    $(this).parents('.message').addClass('no-active');
 });
 
 // creo una funzione per l'invio messaggio
@@ -103,7 +122,7 @@ function inviaMessaggio() {
         $('.messages.active').append(nuovoMessaggio);
         // e infine vado a rempostare il valore del mio input con una stringa vuota
         $('.message-user').val('');
-        // imposto un timeout per la risposta del computer
+        // imposto un timeout per la risposta del computer;
         setTimeout(rispostaComputer, 1500);
         // quando io scrivo nela chat, la chat attiva si posizione nella prima posizione
         $('.chat.active').prependTo('.container-chat');
@@ -113,6 +132,7 @@ function inviaMessaggio() {
         nuovoMessaggio.children('.message-time').text(tempoReale());
         // riporto il tempo reale sulla chat a sinistra al mio invio del messaggio
         $('.chat.active .clock').text(tempoReale());
+        $('.header-right').find('p').text('Online');
     }
 }
 
@@ -167,9 +187,60 @@ function tempoReale() {
     // estraggo le ore e le converto in stringhe
     var ora = orarioMessaggio.getHours().toString();
     // estraggo i minuti, faccio quel passaggio per far si da riportare lo zero, in caso i minuti fossero minori di dieci
-    var minuti = (orarioMessaggio.getMinutes()<10?'0':'') + orarioMessaggio.getMinutes();
+    var minuti = (orarioMessaggio.getMinutes() < 10 ? '0':'') + orarioMessaggio.getMinutes();
     // concateno le due variabili per riprodurre l'orario complessivo
     var oraMinuti = ora + "." + minuti;
     // chiudo la funzione con la variabile oraMinuti returnata
     return oraMinuti
 }
+
+var conversazioni = {
+    'Vera': [
+        {
+            'testo':'You better step it up',
+            'direzione':'received'
+        }
+    ],
+    'Pino': [
+        {
+            'testo':'Ciao, sono Pino',
+            'direzione':'received'
+        }
+    ],
+    'Martino': [
+        {
+            'testo':'Ciao, sono Martino',
+            'direzione':'received',
+        }
+    ],
+    'Martina': [
+        {
+            'testo':'Ciao, sono Martina',
+            'direzione':'received',
+        }
+    ],
+    'Gina': [
+        {
+            'testo':'Ciao, sono Gina',
+            'direzione':'received',
+        }
+    ],
+    'Paolo': [
+        {
+            'testo':'Ciao, sono Paolo',
+            'direzione':'received',
+        }
+    ],
+    'Antonio': [
+        {
+            'testo':'Ciao, sono Antonio',
+            'direzione':'received',
+        }
+    ],
+    'Peppino': [
+        {
+            'testo':'Ciao, sono Peppino',
+            'direzione':'received',
+        }
+    ]
+};
