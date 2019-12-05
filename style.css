@@ -305,11 +305,12 @@
 }
 
 .right-part .messages .message:hover .message-options, .right-part .messages .message .message-options.active {
-	display: block;
+	opacity: 1;
 }
 
 .right-part .messages .message .message-options {
-	display: none;
+    padding-left: 8px;
+	opacity: 0;
 	color: #B6B9BB;
 	cursor: pointer;
 }
@@ -342,11 +343,13 @@
 	height: 50%;
 	line-height: 40px;
 	font-size: 14px;
-	text-align: center;
+    padding-left: 15px;
 }
+
 .right-part .messages .message .message-options-panel > div:hover {
 	color: #B6B9BB;
 }
+
 .right-part .messages .message .message-time {
 	position: absolute;
 	bottom: 5px;
@@ -354,11 +357,13 @@
 	font-size: 10px;
 	color: #B6B9BB;
 }
+
 .right-part .messages .message.received {
 	background: white;
 	float:left;
 	clear:both;
 }
+
 .right-part .messages .message.sent {
 	background: #D5F9BA;
 	float: right;

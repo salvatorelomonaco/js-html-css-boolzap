@@ -18,16 +18,23 @@ $(document).ready(function() {
         }
     })
 
-    // cambio l'icona quando clicco sull'input
-    // seleziono l'input e per riconoscere che è attivo uso .focus
-    $('.message-user').focus(function() {
-        // seleziono l'icona e faccio toggle classe con la classe dell'aeroplanino aggiunta
-        $('.text-area i:last-child').toggleClass('fas fa-microphone fas fa-paper-plane')
+    // cambio l'icona quando scrivo sull'input
+    // seleziono l'input e per riconoscere che sto sctivendo uno keyup
+    $('.message-user').keyup(function() {
+        // rimuovo il microfono
+        $('.text-area i:last-child').removeClass('fas fa-microphone');
+        // aggiungo l'aeroplanino
+        $('.text-area i:last-child').addClass('fas fa-paper-plane');
     })
 
     // viceversa quando io clicco su un'altra zona del documento che non è l'input selezionato
-    $('.message-user').blur(function() {
-        $('.text-area i:last-child').toggleClass('fas fa-microphone fas fa-paper-plane')
+    $('.message-user').keyup(function(event) {
+        if(event.which == 13 ){
+            // rimuovo l'aeroplanino
+            $('.text-area i:last-child').removeClass('fas fa-paper-plane');
+            // aggiungo il microfono
+            $('.text-area i:last-child').addClass('fas fa-microphone');
+        }
     })
 
     // ora riesco a visualizzare il nome della conversazione che ho cercato
@@ -36,24 +43,25 @@ $(document).ready(function() {
         cercaConversazione();
     })
 
-    
     $('.chat').click(function() {
-        var nomeChat = $(this).find('span').text();
-        $('.header-right').hide();
-        $('.header-right[data-nome="' + nomeChat + '"]').show();
-        $('.messages').removeClass('active');
-        $('.messages[data-nome="' + nomeChat + '"]').addClass('active');
         $('.chat').removeClass('active');
         $(this).addClass('active');
-    })
-});
+        var nomeChat = $(this).attr('data-nome');
+        $('.messages').removeClass('active');
+        $('.messages[data-nome="' + nomeChat + '"]').addClass('active');
+        var nomeContatto = $(this).find('span').text();
+        $('.current-chat span').text(nomeContatto);
+        var immagineContatto = $(this).find('img').attr('src');
+        $('.header-right img').attr('src', immagineContatto);
+    });
 
-$(document).on('click','.message i', function () {
-    $(this).next().toggleClass("active");
-});
+    $(document).on('click','.message i', function () {
+        $(this).next().toggleClass("active");
+    });
 
-$(document).on("click", ".message-delete", function(){
-    $(this).parents(".message").hide();
+    $(document).on("click", ".message-delete", function(){
+        $(this).parents(".message").hide();
+    });
 });
 
 // creo una funzione per l'invio messaggio
@@ -73,8 +81,13 @@ function inviaMessaggio() {
         $('.messages.active').append(nuovoMessaggio);
         // e infine vado a rempostare il valore del mio input con una stringa vuota
         $('.message-user').val('');
+        // imposto un timeout per la risposta del computer
+        setTimeout(rispostaComputer, 1500);
+        // quando io scrivo nela chat, la chat attiva si posizione nella prima posizione
+        $('.chat.active').prependTo('.container-chat');
+        // vado a trovare nelle chat il messaggio che io ho scritto e lo vado a sostituire nel p
+        $('.chat.active .name-message').find('p').text(testoMessaggio);
 
-        setTimeout(rispostaComputer, 1000);
     }
 }
 
@@ -88,6 +101,8 @@ function rispostaComputer() {
     messaggioComputer.addClass('received');
     // appendo il messaggio del pc sul container
     $('.messages.active').append(messaggioComputer);
+    // vado a reportare il messaggio di risposta del pc nella chat a destra
+    $('.chat.active .name-message').find('p').text('Got it');
 }
 
 // Creo una funzione per cercare le conversazioni
